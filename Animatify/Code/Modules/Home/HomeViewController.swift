@@ -42,7 +42,10 @@ class HomeViewController: UIViewController {
         Tutorial(action: .tableViews, title: "Animating Tableview cells", difficulty: "Easy", icon: "bolt.fill"),
         Tutorial(action: .loaders(type: .success), title: "Animations for Submit Button", difficulty: "Medium", icon: "bolt.fill"),
         Tutorial(action: .loaders(type: .failure), title: "Animations for Reject Button", difficulty: "Medium", icon: "bolt.fill"),
-        Tutorial(action: .snapCollections, title: "Snap Collection View", difficulty: "Medium", icon: "bolt.fill")
+        Tutorial(action: .snapCollections, title: "Snap Collection View", difficulty: "Medium", icon: "bolt.fill"),
+        Tutorial(action: .loaders(type: .bluetooth), title: "Bluetooth Animations", difficulty: "Medium", icon: "bolt.fill"),
+        Tutorial(action: .buttons, title: "Floating Button Animations", difficulty: "Medium", icon: "bolt.fill"),
+        Tutorial(action: .loaders(type: .wifi), title: "Wifi Animations", difficulty: "Medium", icon: "bolt.fill")
     ]
     
     var transitions: [Transition] = [
@@ -70,7 +73,6 @@ class HomeViewController: UIViewController {
         self.transitionsTableView.dataSource = self
         self.transitionsTableView.register(UINib(nibName: TutorialTableViewCell.description(), bundle: nil), forCellReuseIdentifier: TutorialTableViewCell.description())
         
-        //        self.roundButton.roundCorners(cornerRadius: self.roundButton.frame.width / 2.0)
         self.setupViews()
         self.drawLogo()
     }
@@ -188,10 +190,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     guard let tutorialVC = UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: LoadersViewController.description()) as? LoadersViewController else { return }
                     tutorialVC.loaderType = action.getLoaderType()
                     self.present(tutorialVC, animated: true)
-                }
-                    
-                else if (action == .snapCollections) {
+                } else if( action == .loaders(type: .bluetooth)){
+                    guard let tutorialVC = UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: LoadersViewController.description()) as? LoadersViewController else { return }
+                    tutorialVC.loaderType = action.getLoaderType()
+                    self.present(tutorialVC, animated: true)
+                } else if( action == .loaders(type: .wifi)){
+                    guard let tutorialVC = UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: LoadersViewController.description()) as? LoadersViewController else { return }
+                    tutorialVC.loaderType = action.getLoaderType()
+                    self.present(tutorialVC, animated: true)
+                } else if (action == .snapCollections) {
                     guard let tutorialVC = UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: CollectionTutorialViewController.description()) as? CollectionTutorialViewController else { return }
+                    self.present(tutorialVC, animated: true)
+                } else if (action == .buttons) {
+                    guard let tutorialVC = UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: ButtonEffectsViewController.description()) as? ButtonEffectsViewController else { return }
                     self.present(tutorialVC, animated: true)
                 }
             }
